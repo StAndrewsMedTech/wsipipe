@@ -1,3 +1,27 @@
+"""
+PatchSets are sets of patches and all the information
+required to create them from the slides.
+
+Many patches in the set may use the same details, (which we call PatchSettings):
+* the path of the slide to read from
+* the level of the slide at which to create the patch
+* the size of the patch to be created
+* how to load the slide
+
+To create an individual patch, you need to know:
+* the top left position of the patch
+* the label to be applied to the patch
+
+Therefore the PatchSets are a dataframe and a settings list.
+
+The settings list is a list of PatchSettings each of which contains: 
+    slide_path, level, patch_size, loader
+In the dataframe each row represents a patch and contains columns:
+   x (top), y (left),  label, settings (index to list)
+
+"""
+
+
 from dataclasses import asdict, dataclass
 import itertools
 import json
@@ -14,12 +38,21 @@ from wsipipe.utils import invert
 
 @dataclass
 class PatchSetting:
+    """Patch Setting Definition
+
+    Args:
+        level (int): The level at which patches are extracted
+        patch_size (int): The size of patches to be created assumes square
+        slide_path (Path): the path to the whole slide image
+        loader (Loader): A method for loading the slide
+    """
     level: int
     patch_size: int
     slide_path: Path  # not stored in the dataframe
     loader: Loader  # not stored in the dataframe
 
     def to_sdict(self):
+        """Writes a PatchSetting to a dictionary so it can be saved to disk"""
         d = asdict(self)
         d["slide_path"] = str(self.slide_path)
         d["loader"] = self.loader.name
@@ -27,6 +60,7 @@ class PatchSetting:
 
     @classmethod
     def from_sdict(cls, sdict: dict):
+        """ Converts a dictionary to a PatchSetting"""
         sdict["slide_path"] = Path(sdict["slide_path"])
         sdict["loader"] = get_loader(sdict["loader"])
         return cls(**sdict)
@@ -48,6 +82,14 @@ class PatchSet:
         self.settings = settings
 
     def save(self, path: Path) -> None:
+        """Saves a PatchSet to disk
+        
+        The dataframe is saved to a csv called frame.csv
+        The settings are saved in a text file called settings.json
+
+        Args:
+            path (Path): the directory in which to save the patchset
+        """
         path.mkdir(parents=True, exist_ok=True)
         self.df.to_csv(path / "frame.csv", index=False)
         dicts = [s.to_sdict() for s in self.settings]
@@ -56,6 +98,15 @@ class PatchSet:
 
     @classmethod
     def load(cls, path: Path) -> "PatchSet":
+        """Loads a PatchSet from disk
+        
+        Assumes:
+        The dataframe is saved to a csv called frame.csv
+        The settings are saved in a text file called settings.json
+
+        Args:
+            path (Path): the directory in which the patchset is saved
+        """
         print(f"loading {path}")
         df = pd.read_csv(path / "frame.csv")
         with open(path / "settings.json") as json_file:
@@ -64,6 +115,14 @@ class PatchSet:
         return cls(df, settings)
 
     def export_patches(self, output_dir: Path) -> None:
+        """Creates all patches in a patch set
+        
+        Writes patches in subdirectories of their label 
+        Patches are name slide_path_x_y_level_patch_size.png
+
+        Args:
+            output_dir (Path): the directory in which the patches are saved
+        """
         groups = self.df.groupby("setting")
         for setting_idx, group in groups:
             s = self.settings[setting_idx]
@@ -72,6 +131,11 @@ class PatchSet:
             )
 
     def description(self):
+        """ Returns basic summary of patchset
+
+        returns the labels and the total number of patches of each label
+    
+        """
         labels = np.unique(self.df.label)
         sum_totals = [np.sum(self.df.label == label) for label in labels]
         return labels, sum_totals
@@ -85,6 +149,7 @@ class PatchSet:
         patch_size: int,
         loader: Loader,
     ):
+        """Creates all the patches for an individual PatchSetting"""
         def get_output_dir_for_label(label: str) -> Path:
             label_str = invert(loader.labels)[label]
             label_dir = output_dir / label_str

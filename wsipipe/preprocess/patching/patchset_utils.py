@@ -1,3 +1,7 @@
+"""
+Utilities for creating sets of patches
+"""
+
 import itertools
 from pathlib import Path
 from typing import List
@@ -20,6 +24,21 @@ def make_patchset_for_slide(
     patch_finder: PatchFinder,
     project_root: Path = Path('/')
 ) -> PatchSet:
+    """Creates a patchset for a single slide
+
+    This creates a PatchSet for a single slide.
+
+    Args:
+        slide_path (Path): path to whole slide image
+        annot_path (Path): annotation information for slide
+        loader (Loader): loader to use to load slide and annotations
+        tissue_detector (TissueDetector): tissue detector to use to remove background
+        patch_finder (PatchFinder): patch finder to use to create patches
+        project_root (Path, optional): paths will be stored relative to the project root.
+            Defaults to root (absolute paths)
+    Returns:
+        patchset (PatchSet): A PatchSet for the slide
+    """
 
     with loader.load_slide(project_root / slide_path) as slide:
         annotations = loader.load_annotations(project_root / annot_path)
@@ -44,6 +63,22 @@ def make_and_save_patchsets_for_dataset(
     output_dir: Path,
     project_root: Path = Path('/')    
 ) -> List[PatchSet]:
+    """Creates PatchSets for all slides in a dataset
+
+    For each slide in the dataset this creates the PatchSet then saves it in a
+    sub directory of the output_dir
+
+    Args:
+        dataset (pd.DataFrame): a dataframe containing columns slide and annotation
+        loader (Loader): loader to use to load slide and annotations
+        tissue_detector (TissueDetector): tissue detector to use to remove background
+        patch_finder (PatchFinder): patch finder to use to create patches
+        output_dir (Path): a directory to save the patchsets in
+        project_root (Path, optional): paths will be stored relative to the project root.
+            Defaults to root (absolute paths)
+    Returns:
+        patchset (List[PatchSet]): A list of PatchSets one for each slide
+    """
 
     patchsets = []
     for row in dataset.itertuples():
@@ -61,12 +96,33 @@ def make_and_save_patchsets_for_dataset(
 
 
 def load_patchsets_from_directory(patchsets_dir: Path):
+    """Loads PatchSets from a directory
+
+    Loads patchsets for a whole dataset stored in subdirectories of patchsets_dir
+
+    Args:
+        patchsets_dir (Path): a path to a directory containing subdirectories with PatchSets
+    Returns:
+        patchset (List[PatchSet]): A list of PatchSets one for each slide
+    """
     patchset_dir_list = [x for x in patchsets_dir.iterdir() if x.is_dir()]
     patchset_list = [PatchSet.load(p) for p in patchset_dir_list]
     return patchset_list
 
 
 def combine(patchsets: List[PatchSet]) -> PatchSet:
+    """ Combines multiple patchsets into one
+
+    This gives a combined dataframe with all patches in a dataset,
+    for example to use to sample patches.
+    It also renumbers settings so that indexes in dataframe match 
+    correct setting in combined_settings list
+
+    Args:
+        patchsets (List[PatchSets]): A list of PatchSets
+    Returns:
+        A combined patchset
+    """
     # compute and apply the settings index offset
     # offset is equal to the size of the settings object up to this point
     offset = 0
@@ -86,7 +142,18 @@ def combine(patchsets: List[PatchSet]) -> PatchSet:
     return PatchSet(combined_df, combined_settings)
 
 
-def visualise_patches_on_slide(ps: PatchSet, vis_level, project_root: Path = Path('/')):
+def visualise_patches_on_slide(ps: PatchSet, vis_level: (int), project_root: Path = Path('/')) -> Image:
+    """ Draws patches on a thumbnail of the slide
+
+    Visualise where on the slide the patches occur.
+    Assumes a patch set for one slide with only one set of setting
+
+    Args:
+        ps (PatchSet): A PatchSet for one slide
+        vis_level (int): the level at which to create a slide image to draw patches on
+    Returns:
+        thumb (Image): A thumbnail of the slide with patch locations drawn on
+    """
     assert len(ps.settings) == 1, "The input patch set contains patches from more than one slide."
     slide_settings = ps.settings[0]
 
