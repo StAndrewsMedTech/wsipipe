@@ -1,7 +1,7 @@
+from typing import Callable
+
 import numpy as np
 import pandas as pd
-
-from typing import Callable
 
 from wsipipe.preprocess.patching import PatchSet
 

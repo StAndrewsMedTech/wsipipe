@@ -4,14 +4,12 @@ from typing import List
 
 import numpy as np
 import pandas as pd
-from tqdm.auto import tqdm
 from PIL import Image, ImageDraw
 
 from wsipipe.load.datasets import Loader
 from wsipipe.preprocess.tissue_detection import TissueDetector
 from wsipipe.preprocess.patching.patch_finder import PatchFinder
 from wsipipe.preprocess.patching.patchset import PatchSet, PatchSetting
-from wsipipe.utils import project_root
 
 
 def make_patchset_for_slide(
@@ -48,7 +46,7 @@ def make_and_save_patchsets_for_dataset(
 ) -> List[PatchSet]:
 
     patchsets = []
-    for row in tqdm(dataset.itertuples()):
+    for row in dataset.itertuples():
         patchset_path = output_dir / Path(row.slide).stem
         if patchset_path.is_dir():
             patchset = PatchSet.load(patchset_path)

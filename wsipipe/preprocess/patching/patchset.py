@@ -8,8 +8,6 @@ import pandas as pd
 import cv2
 import numpy as np
 
-from tqdm.auto import tqdm
-
 from wsipipe.load.datasets import Loader, get_loader
 from wsipipe.load.slides import Region, SlideBase
 from wsipipe.utils import invert

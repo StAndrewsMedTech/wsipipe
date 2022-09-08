@@ -4,7 +4,7 @@ Credits
 
 Development Lead
 ----------------
-
+* Christina Fell <cmf21@st-andrews.ac.uk>
 * David Morrison <dm236@st-andrews.ac.uk>
 
 Contributors
