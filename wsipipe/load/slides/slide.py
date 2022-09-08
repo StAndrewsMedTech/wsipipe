@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import List
 
 import numpy as np
-from PIL import Image
+from PIL.Image import Image
 
 from wsipipe.load.slides.region import Region
 from wsipipe.utils import Size, Point
