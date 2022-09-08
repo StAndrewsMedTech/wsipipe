@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import List
 
-from PIL import Image
+from PIL.Image import Image
 from openslide import open_slide
 
 from wsipipe.load.slides.slide import SlideBase
@@ -27,7 +27,7 @@ class OSSlide(SlideBase):
 
     @property
     def dimensions(self) -> List[Size]:
-         """ Gets slide dimensions in pixels for all levels in pyramid
+        """ Gets slide dimensions in pixels for all levels in pyramid
 
         If fewer than 10 levels exist in the pyramid it calculates the 
         extra sizes and adds them to the list
@@ -93,7 +93,7 @@ class OSSlide(SlideBase):
             region_out = self.convert_region(region)
         return region_out
 
-    def read_regions(self, regions: List[Region]) -> Image:
+    def read_regions(self, regions: List[Region]) -> List[Image]:
         # TODO: this call could be parallelised
         # though pytorch loaders will do this for us
         regions = [self.read_region(region) for region in regions]

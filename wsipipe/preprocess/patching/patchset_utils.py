@@ -22,7 +22,7 @@ def make_patchset_for_slide(
 ) -> PatchSet:
 
     with loader.load_slide(project_root / slide_path) as slide:
-        annotations = loader.load_annotations(project_root /annot_path)
+        annotations = loader.load_annotations(project_root / annot_path)
         labels_shape = slide.dimensions[patch_finder.labels_level].as_shape()
         scale_factor = 2**patch_finder.labels_level
         labels_image = annotations.render(labels_shape, scale_factor)
