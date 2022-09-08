@@ -27,7 +27,7 @@ class OSSlide(SlideBase):
 
     @property
     def dimensions(self) -> List[Size]:
-         """ Gets slide dimensions in pixels for all levels in pyramid
+        """ Gets slide dimensions in pixels for all levels in pyramid
 
         If fewer than 10 levels exist in the pyramid it calculates the 
         extra sizes and adds them to the list
