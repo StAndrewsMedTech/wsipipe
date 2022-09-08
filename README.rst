@@ -17,6 +17,8 @@ wsipipe
 
 
 A set of tools for processing pathology whole slide images for deep learning.
+[![DOI](https://zenodo.org/badge/534149916.svg)](https://zenodo.org/badge/latestdoi/534149916)
+
 
 
 * Free software: MIT license
