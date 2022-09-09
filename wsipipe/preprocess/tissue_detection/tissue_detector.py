@@ -1,14 +1,39 @@
+"""
+Tissue Detectors create a 2d array of booleans indicating if that area contains
+tissue or not. 
+
+The input is an RGB numpy array representing the slide.
+Usually a downsampled thumbnail image as whole slide images as level 0
+are often too large to store in memory.
+
+"""
+
 from abc import ABCMeta, abstractmethod
+from typing import List, Union
 
 import numpy as np
 from skimage.color import rgb2hsv, rgb2gray
 from skimage.filters import threshold_otsu
 
-from wsipipe.preprocess.tissue_detection.filters import NullBlur
-from wsipipe.preprocess.tissue_detection.morphology_transforms import NullTransform
+from wsipipe.preprocess.tissue_detection.filters import PreFilter, NullBlur
+from wsipipe.preprocess.tissue_detection.morphology_transforms import MorphologyTransform, NullTransform
 
 class TissueDetector(metaclass=ABCMeta):
-    def __init__(self, pre_filter = NullBlur(), morph_transform = NullTransform()) -> None:
+    """Generic tissue detector class
+
+    Args:
+        pre_filter: Any filters or transforms that are to be applied before the tissue detection.
+            Can be lists of filters or individual filters. Defaults to NullBlur
+        morph_transform (): Any filters or transforms that are to be applied after the tissue detection.
+            Can be lists of transforms or individual transforms. Defaults to NullTransform
+    Returns:
+        An ndarray of booleans with the same dimensions as the input image
+        True means foreground, False means background
+    """
+    def __init__(self, 
+        pre_filter: Union[PreFilter, List[PreFilter]] = NullBlur(), 
+        morph_transform: Union[MorphologyTransform, List[MorphologyTransform]] = NullTransform()
+    ) -> None:
         # assign values
         if not isinstance(pre_filter, list):
             self.pre_filter = [pre_filter]
@@ -26,11 +51,14 @@ class TissueDetector(metaclass=ABCMeta):
 
 class TissueDetectorOTSU(TissueDetector):
     def __call__(self, image: np.ndarray) -> np.ndarray:
-        """creates a dataframe of pixels locations labelled as tissue or not
-        Based on the method proposed by wang et all
+        """Applies Otsu thresholding as a tissue detector
+
         1. Convert from RGB to HSV
         2. Perform automatic thresholding using Otsu's method on the H and S channels
         3. Combine the thresholded H and S channels
+
+        Also applies prefilters and post transforms if specified
+
         Args:
             image: A scaled down WSI image. Must be r,g,b.
         Returns:
@@ -58,19 +86,31 @@ class TissueDetectorOTSU(TissueDetector):
         # apply morphological transforms
         for mt in self.morph_transform:
             np_mask = mt(np_mask)
+
         return np_mask
 
 
 class TissueDetectorGreyScale(TissueDetector):
     def __init__(self, pre_filter = NullBlur(), morph_transform = NullTransform(), grey_level: float = 0.8) -> None:
+        """ Greyscale tissue detector 
+        
+        In addition to prefilter and morph_transform from generic class
+
+        Args: 
+            grey_level (float): Value between 0 and 1 for greyscale threshold. Defaults to 0.8
+        """
         super().__init__(pre_filter, morph_transform)
         self.grey_level = grey_level
 
     def __call__(self, image: np.ndarray) -> np.ndarray:
-        """creates a dataframe of pixels locations labelled as tissue or not
+        """Applies greyscale thresholding as a tissue detector
+
         1. Convert PIL image to numpy array
         2. Convert from RGB to gray scale
         3. Get masks, any pixel that is less than a threshold (e.g. 0.8)
+
+        Also applies prefilters and post transforms if specified
+
         Args:
         image: A scaled down WSI image. Must be r,g,b.
         Returns:
@@ -107,7 +147,10 @@ class TissueDetectorGreyScale(TissueDetector):
 
 class TissueDetectorAll(TissueDetector):
     def __call__(self, image: np.ndarray) -> np.ndarray:
-        """creates a dataframe of all pixels in image labelled as foreground
+        """A Null tissue detector
+
+        Just returns the whole image as True everything is foreground to be kept
+
         Args:
         image: A scaled down WSI image. Must be r,g,b.
         Returns:
@@ -117,15 +160,7 @@ class TissueDetectorAll(TissueDetector):
         # convert PIL image to numpy array
         image = np.asarray(image)
 
-        # apply filter
-        for pf in self.pre_filter:
-            image = pf(image)
-
         # get masks, all pixels
         np_mask = np.array(np.ones(image.shape[0:2]), dtype=bool)
-
-        # apply morphological transforms
-        for mt in self.morph_transform:
-            np_mask = mt(np_mask)
 
         return np_mask
