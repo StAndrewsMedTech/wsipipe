@@ -1,0 +1,8 @@
+Slide splitting into train valid
+Cross validation of slides
+Get info functions for slide splitting
+Patch visualisation to deal with more than one setting
+Calculate normalize parameter calcs
+Add CZi loader
+Add isyntax loader
+Add geojson annot loader
