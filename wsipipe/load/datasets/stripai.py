@@ -22,10 +22,11 @@ class StripaiLoader(Loader):
     def name(self) -> str:
         return "StripaiLoader"
 
-    def load_annotations(self, label: str) -> AnnotationSet:
+    def load_annotations(self, label: Path) -> AnnotationSet:
         # if there is no annotation file the just pass and empty list
         annotations = []
         labels_order = ["background", "Other", "CE", "LAA"]
+        label = str(label)
         return AnnotationSet(annotations, self.labels, labels_order, label)
 
     def load_slide(self, path: Path) -> SlideBase:
