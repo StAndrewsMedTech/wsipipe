@@ -262,7 +262,7 @@ class RandomPatchFinder(PatchFinder):
             if testy >= labels_image.shape[0]:
                 continue
             testlabels = labels_image[testy:testymx, testx:testxmx]
-            if pool_mode == "mode":
+            if self.pool_mode == "mode":
                 testlabel = get_mode(testlabels)
             else:
                 testlabel = np.max(testlabels)
