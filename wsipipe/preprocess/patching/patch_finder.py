@@ -177,7 +177,7 @@ class RandomPatchFinder(PatchFinder):
         patch_size: int,
         border: int = 0,
         npatches: int = 1000,
-        pool_mode = "mode":
+        pool_mode: str = "mode"
     ) -> None:
         """ Random Patch Finder Class
 
