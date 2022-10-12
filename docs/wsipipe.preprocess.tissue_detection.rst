@@ -1,9 +1,6 @@
 wsipipe.preprocess.tissue\_detection package
 ============================================
 
-Submodules
-----------
-
 wsipipe.preprocess.tissue\_detection.filters module
 ---------------------------------------------------
 

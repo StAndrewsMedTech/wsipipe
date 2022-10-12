@@ -1,9 +1,6 @@
 wsipipe.load.slides package
 ===========================
 
-Submodules
-----------
-
 wsipipe.load.slides.openslide module
 ------------------------------------
 

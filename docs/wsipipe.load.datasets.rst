@@ -1,9 +1,6 @@
 wsipipe.load.datasets package
 =============================
 
-Submodules
-----------
-
 wsipipe.load.datasets.camelyon16 module
 ---------------------------------------
 

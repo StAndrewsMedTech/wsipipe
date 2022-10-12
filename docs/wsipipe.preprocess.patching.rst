@@ -1,9 +1,6 @@
 wsipipe.preprocess.patching package
 ===================================
 
-Submodules
-----------
-
 wsipipe.preprocess.patching.patch\_finder module
 ------------------------------------------------
 

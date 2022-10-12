@@ -1,9 +1,6 @@
 wsipipe.utils package
 =====================
 
-Submodules
-----------
-
 wsipipe.utils.convert module
 ----------------------------
 

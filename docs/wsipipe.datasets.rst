@@ -1,7 +1,15 @@
 wsipipe.datasets package
 ========================
 
-wsipipe.datasets.camelyon16 module 
+Module contents
+---------------
+
+.. automodule:: wsipipe.datasets
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+wsipipe.datasets.camelyon16 
 ----------------------------------
 
 .. automodule:: wsipipe.datasets.camelyon16
@@ -25,10 +33,3 @@ wsipipe.datasets.dataset\_utils module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
-
-.. automodule:: wsipipe.datasets
-   :members:
-   :undoc-members:
-   :show-inheritance:

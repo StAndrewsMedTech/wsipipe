@@ -1,9 +1,9 @@
 """
 This module creates the dataframe for the STRIP AI dataset with the following columns:
-- The slide column stores the paths on disk of the whole slide images
-- The annotation column records a string with the slide label 
-- The label column is the slide level label
-- The tags column contains the center and patient for each slide
+    - The slide column stores the paths on disk of the whole slide images
+    - The annotation column records a string with the slide label 
+    - The label column is the slide level label
+    - The tags column contains the center and patient for each slide
 
 This assumes there is a folder on disk structured the same as downloading
 from the kaggle website
@@ -17,6 +17,7 @@ import pandas as pd
 
 def convert_to_pyramids(mayo_path: Path = Path("data", "mayo-clinic-strip-ai"), project_root: Path = Path('/')):
     """ Create pyramids for whole slide images
+
     The whole slide images as downloaded only contain data at level 0, 
     no other levels are present. This can make it slow to access the slides.
     This function will run over all the slides in the the dataset and write
@@ -50,6 +51,7 @@ def convert_to_pyramids(mayo_path: Path = Path("data", "mayo-clinic-strip-ai"), 
 
 def training(mayo_path: Path = Path("data", "mayo-clinic-strip-ai"), project_root: Path = Path('/')) -> pd.DataFrame:
     """ Create Strip AI training dataset
+    
     This function goes through the input directories for the training slides, 
     and matches up the slide paths with infomation in the csv
     It creates a dataframe with slide path with matching slide label stored for both label and annotation.

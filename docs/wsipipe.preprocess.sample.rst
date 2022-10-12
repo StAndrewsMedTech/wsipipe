@@ -1,9 +1,6 @@
 wsipipe.preprocess.sample package
 =================================
 
-Submodules
-----------
-
 wsipipe.preprocess.sample.sampler module
 ----------------------------------------
 

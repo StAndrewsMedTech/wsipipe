@@ -1,8 +1,6 @@
 wsipipe.load.annotations package
 ================================
 
-Submodules
-----------
 
 wsipipe.load.annotations.annotation module
 ------------------------------------------
