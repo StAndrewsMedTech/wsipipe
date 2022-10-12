@@ -46,7 +46,7 @@ class FillHolesTransform(MorphologyTransform):
     Segments smaller than hole_size_to_fill in area are filled.  
     Size of a pixel at the image level is 2**level_in * level zero size
     Hole_size_to_fill (an area) is converted to number of pixels by
-    dividing by the size of pixel at image level.
+    dividing by the size of rpixel at image level.
 
     Input image is a binary image 
     Image is segmented using scikit image regionprops.
