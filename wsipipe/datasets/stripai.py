@@ -1,9 +1,9 @@
 """
 This module creates the dataframe for the STRIP AI dataset with the following columns:
-* The slide column stores the paths on disk of the whole slide images
-* The annotation column records a string with the slide label 
-* The label column is the slide level label
-* The tags column contains the center and patient for each slide
+- The slide column stores the paths on disk of the whole slide images
+- The annotation column records a string with the slide label 
+- The label column is the slide level label
+- The tags column contains the center and patient for each slide
 
 This assumes there is a folder on disk structured the same as downloading
 from the kaggle website

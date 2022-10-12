@@ -82,6 +82,10 @@ todo_include_todos = False
 # mock imports don't actually want to import these to build docs
 autodoc_mock_imports = ['numpy', 'pandas', 'torch', 'cv2', 'PIL', 'openslide', 'scipy', 'skimage', 'click']
 
+# show typehints as description
+autodoc_typehints = "description"
+
+
 # -- Options for HTML output -------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
