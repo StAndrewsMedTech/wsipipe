@@ -17,6 +17,8 @@ setup_requirements = [ ]
 
 test_requirements = [ ]
 
+project = "wsipipe"
+
 setup(
     author="David Morrison",
     author_email='dm236@st-andrews.ac.uk',
