@@ -1,0 +1,1 @@
+"""Contains functionality to load slides, annotations or entire datasets"""

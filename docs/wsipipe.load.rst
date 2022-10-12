@@ -1,6 +1,14 @@
 wsipipe.load package
 ====================
 
+Module contents
+---------------
+
+.. automodule:: wsipipe.load
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -11,10 +19,3 @@ Subpackages
    wsipipe.load.datasets
    wsipipe.load.slides
 
-Module contents
----------------
-
-.. automodule:: wsipipe.load
-   :members:
-   :undoc-members:
-   :show-inheritance:

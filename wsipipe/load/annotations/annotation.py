@@ -1,6 +1,5 @@
 """
-Parent classes that contain functionality for reading annotations
-
+Parent classes that contain functionality for reading annotations. 
 These are used to render different types of annotations into a common format
 
 """
