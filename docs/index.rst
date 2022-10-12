@@ -5,13 +5,9 @@ Welcome to wsipipe's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   readme
-   installation
-   usage
+   getting_started
    modules
-   contributing
-   authors
-   history
+   more_info
 
 Indices and tables
 ==================
