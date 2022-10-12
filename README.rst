@@ -12,13 +12,14 @@ wsipipe
 .. image:: https://readthedocs.org/projects/wsipipe/badge/?version=latest
         :target: https://wsipipe.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
-
+        
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.7060584.svg
+        :target: https://doi.org/10.5281/zenodo.7060584
 
 
 
 A set of tools for processing pathology whole slide images for deep learning.
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.7060584.svg
-        :target: https://doi.org/10.5281/zenodo.7060584
+
 
 
 * Free software: MIT license
