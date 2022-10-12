@@ -1,9 +1,6 @@
 wsipipe package
 ===============
 
-Subpackages
------------
-
 .. toctree::
    :maxdepth: 1
 

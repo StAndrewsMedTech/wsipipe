@@ -1,17 +1,11 @@
 """
-A dataset is a dataframe with columns slide, annotation, label and tags
+This module creates the dataframe for the camelyon 16 dataset with the follwing columns: 
+* The slide column stores the paths on disk of the whole slide images.
+* The annotation column records a path to the annotation files.
+* The label column is the slide level label.
+* The tags column is blank for camelyon 16.
 
-This module creates the dataframe for the camelyon 16 dataset.
-
-The slide column stores the paths on disk of the whole slide images
-
-The annotation column records a path to the annotation files 
-
-The label column is the slide level label
-
-Tags is blank for camelyon 16
-
-This assumes there is a folder on disk structured the same as downloading
+This assumes there is a folder on disk structured the same as downloading 
 from the camelyon grand challenge Camelyon 16 google drive:
 https://camelyon17.grand-challenge.org/Data/ 
 
