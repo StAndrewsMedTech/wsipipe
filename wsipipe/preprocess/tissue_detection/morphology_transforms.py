@@ -1,3 +1,7 @@
+"""
+Transforms can be applied to binary or labelled images, for example to fill holes 
+"""
+
 from abc import ABCMeta, abstractmethod
 import math
 
@@ -18,7 +22,7 @@ class NullTransform(MorphologyTransform):
 
 class SimpleClosingTransform(MorphologyTransform):
     def __call__(self, image: np.ndarray) -> np.ndarray:
-        """ Applies binary closing transform """
+        """ Applies binary closing transform (fills small holes in a binary image)"""
         mask_out = binary_closing(image)
         return mask_out
 
@@ -30,7 +34,7 @@ class SizedClosingTransform(MorphologyTransform):
         self.level_zero_size = level_zero_size
         
     def __call__(self, image: np.ndarray) -> np.ndarray:
-        """ Applies binary closing transform with a neighbourhood off specified size"""
+        """ Applies binary closing transform with a neighbourhood of specified size (fills holes smaller than specified size)"""
         area_of_pixel = 2 ** self.level_in * self.level_zero_size
         pixels_to_expand = math.ceil(self.expand_size / area_of_pixel)
         neighbourhood = np.ones((pixels_to_expand, pixels_to_expand))
@@ -38,6 +42,24 @@ class SizedClosingTransform(MorphologyTransform):
         return mask_out
 
 class FillHolesTransform(MorphologyTransform):
+    """Fills holes in an image, using segmentation
+    Segments smaller than hole_size_to_fill in area are filled.  
+    Size of a pixel at the image level is 2**level_in * level zero size
+    Hole_size_to_fill (an area) is converted to number of pixels by
+    dividing by the size of pixel at image level.
+
+    Input image is a binary image 
+    Image is segmented using scikit image regionprops.
+    If the area of the region is less than the specified hole size 
+    and the mean intensity of the region is less than 0.1 (out of 1)
+    then the region is filled by converting to True/1/white 
+
+    Args:
+    level_in: level of input image 
+    hole_size_to_fill: dark areas smaller in size than this will be filled
+    level_zero_size: size of a pixel at level zero
+    
+    """
     def __init__(self, level_in: int, hole_size_to_fill: float = 250, level_zero_size: float = 0.25) -> None:
         # assign values
         self.level_in = level_in
@@ -66,13 +88,22 @@ class FillHolesTransform(MorphologyTransform):
         return filled_holes
 
 class MaxPoolTransform(MorphologyTransform):
+    """ Applies max pool
+    Takes a big input image and returns a smaller output image. 
+    Every pixel in the output image represents 2**(level_out - level_in) pixels in input image.
+    The pixel value for the output image is the maximum of the pixels in that region of the input image.
+
+    Args: 
+    level_in: Initial level of image 
+    level_out: Output level of image (must be a smaller image level_out > level_in) 
+    """
     def __init__(self, level_in: int, level_out: int) -> None:
         # assign values
         self.level_in = level_in
         self.level_out = level_out
         
     def __call__(self, image: np.ndarray) -> np.ndarray:
-        """ Applies max pool"""
+
         pool_size = 2 ** (self.level_out - self.level_in)
         image_out = block_reduce(image, (pool_size, pool_size), func=np.max)
         return image_out

@@ -9,6 +9,19 @@ from wsipipe.preprocess.tissue_detection.tissue_detector import TissueDetector
 def visualise_tissue_detection_for_slide(
     slide_path: str, loader: Loader, vis_level:int, tissue_detector: TissueDetector
 ) -> Image:
+    """Draws detected tissue as an overlay on a thumbnail of the slide
+
+    Thumbnail of a slide is created at vis level
+    Tissue detected by tissue detector is outlined in green on the thumbnail 
+
+    Args:
+    slide_path: A path to a whole slide image file
+    loader: the type of loader to use to read the WSI
+    vis_level: the level at which to create the thumbnail 
+    tissue_detector: the tissue detector to apply
+    Returns:
+    A PIL Image
+    """
     with loader.load_slide(slide_path) as slide:
         thumb = slide.get_thumbnail(vis_level)
     tissue_mask = tissue_detector(thumb)
