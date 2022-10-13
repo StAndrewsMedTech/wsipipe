@@ -1,15 +1,12 @@
 wsipipe.preprocess.tissue\_detection package
 ============================================
 
-Module contents
----------------
-
 .. automodule:: wsipipe.preprocess.tissue_detection
    :members:
    :undoc-members:
    :show-inheritance:
 
-wsipipe.preprocess.tissue\_detection.tissue\_detector module
+tissue\_detector module
 ------------------------------------------------------------
 
 .. automodule:: wsipipe.preprocess.tissue_detection.tissue_detector
@@ -17,7 +14,7 @@ wsipipe.preprocess.tissue\_detection.tissue\_detector module
    :undoc-members:
    :show-inheritance:
 
-wsipipe.preprocess.tissue\_detection.filters module
+filters module
 ---------------------------------------------------
 
 .. automodule:: wsipipe.preprocess.tissue_detection.filters
@@ -25,7 +22,7 @@ wsipipe.preprocess.tissue\_detection.filters module
    :undoc-members:
    :show-inheritance:
 
-wsipipe.preprocess.tissue\_detection.morphology\_transforms module
+morphology\_transforms module
 ------------------------------------------------------------------
 
 .. automodule:: wsipipe.preprocess.tissue_detection.morphology_transforms
@@ -33,7 +30,7 @@ wsipipe.preprocess.tissue\_detection.morphology\_transforms module
    :undoc-members:
    :show-inheritance:
 
-wsipipe.preprocess.tissue\_detection.visualise module
+visualise module
 -----------------------------------------------------
 
 .. automodule:: wsipipe.preprocess.tissue_detection.visualise

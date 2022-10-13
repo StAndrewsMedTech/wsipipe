@@ -1,9 +1,6 @@
 wsipipe.load package
 ====================
 
-Module contents
----------------
-
 .. automodule:: wsipipe.load
    :members:
    :undoc-members:
@@ -13,7 +10,7 @@ Subpackages
 -----------
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
 
    wsipipe.load.annotations
    wsipipe.load.datasets

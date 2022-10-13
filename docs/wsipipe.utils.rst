@@ -1,15 +1,12 @@
 wsipipe.utils package
 =====================
 
-Module contents
----------------
-
 .. automodule:: wsipipe.utils
    :members:
    :undoc-members:
    :show-inheritance:
 
-wsipipe.utils.convert module
+convert module
 ----------------------------
 
 .. automodule:: wsipipe.utils.convert
@@ -17,7 +14,7 @@ wsipipe.utils.convert module
    :undoc-members:
    :show-inheritance:
 
-wsipipe.utils.filters module
+filters module
 ----------------------------
 
 .. automodule:: wsipipe.utils.filters
@@ -25,7 +22,7 @@ wsipipe.utils.filters module
    :undoc-members:
    :show-inheritance:
 
-wsipipe.utils.geometry module
+geometry module
 -----------------------------
 
 .. automodule:: wsipipe.utils.geometry

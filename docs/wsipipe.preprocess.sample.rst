@@ -1,7 +1,7 @@
 wsipipe.preprocess.sample package
 =================================
 
-wsipipe.preprocess.sample.sampler module
+sampler module
 ----------------------------------------
 
 .. automodule:: wsipipe.preprocess.sample.sampler

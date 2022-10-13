@@ -1,15 +1,12 @@
 wsipipe.load.datasets package
 =============================
 
-Module contents
----------------
-
 .. automodule:: wsipipe.load.datasets
    :members:
    :undoc-members:
    :show-inheritance:
 
-wsipipe.load.datasets.loader module
+loader module
 -----------------------------------
 
 .. automodule:: wsipipe.load.datasets.loader
@@ -17,7 +14,7 @@ wsipipe.load.datasets.loader module
    :undoc-members:
    :show-inheritance:
 
-wsipipe.load.datasets.camelyon16 module
+camelyon16 module
 ---------------------------------------
 
 .. automodule:: wsipipe.load.datasets.camelyon16
@@ -25,7 +22,7 @@ wsipipe.load.datasets.camelyon16 module
    :undoc-members:
    :show-inheritance:
 
-wsipipe.load.datasets.stripai module
+stripai module
 ------------------------------------
 
 .. automodule:: wsipipe.load.datasets.stripai
@@ -33,7 +30,7 @@ wsipipe.load.datasets.stripai module
    :undoc-members:
    :show-inheritance:
 
-wsipipe.load.datasets.registry module
+registry module
 -------------------------------------
 
 .. automodule:: wsipipe.load.datasets.registry

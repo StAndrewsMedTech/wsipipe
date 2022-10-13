@@ -1,15 +1,12 @@
 wsipipe.load.slides package
 ===========================
 
-Module contents
----------------
-
 .. automodule:: wsipipe.load.slides
    :members:
    :undoc-members:
    :show-inheritance:
 
-wsipipe.load.slides.slide module
+slide module
 --------------------------------
 
 .. automodule:: wsipipe.load.slides.slide
@@ -17,7 +14,7 @@ wsipipe.load.slides.slide module
    :undoc-members:
    :show-inheritance:
 
-wsipipe.load.slides.openslide module
+openslide module
 ------------------------------------
 
 .. automodule:: wsipipe.load.slides.openslide
@@ -25,7 +22,7 @@ wsipipe.load.slides.openslide module
    :undoc-members:
    :show-inheritance:
 
-wsipipe.load.slides.region module
+region module
 ---------------------------------
 
 .. automodule:: wsipipe.load.slides.region

@@ -10,7 +10,7 @@ Subpackages
 -----------
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
 
    wsipipe.preprocess.patching
    wsipipe.preprocess.sample

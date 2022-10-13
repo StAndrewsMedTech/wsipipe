@@ -1,15 +1,12 @@
 wsipipe.load.annotations package
 ================================
 
-Module contents
----------------
-
 .. automodule:: wsipipe.load.annotations
    :members:
    :undoc-members:
    :show-inheritance:
 
-wsipipe.load.annotations.annotation module
+annotation module
 ------------------------------------------
 
 .. automodule:: wsipipe.load.annotations.annotation
@@ -17,7 +14,7 @@ wsipipe.load.annotations.annotation module
    :undoc-members:
    :show-inheritance:
 
-wsipipe.load.annotations.asapxml module
+asapxml module
 ---------------------------------------
 
 .. automodule:: wsipipe.load.annotations.asapxml
