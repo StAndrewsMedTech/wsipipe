@@ -9,7 +9,7 @@ preprocess.patching package
 patch\_finder module
 ------------------------------------------------
 
-.. automodule:: patch_finder
+.. automodule:: wsipipe.preprocess.patching.patch_finder
    :members:
    :undoc-members:
    :show-inheritance:
@@ -20,6 +20,7 @@ patchset module
 .. automodule:: wsipipe.preprocess.patching.patchset
    :members:
    :undoc-members:
+   :show-inheritance:
 
 patchset\_utils module
 --------------------------------------------------

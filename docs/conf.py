@@ -85,6 +85,9 @@ autodoc_mock_imports = ['numpy', 'pandas', 'torch', 'cv2', 'PIL', 'openslide', '
 # show typehints as description
 autodoc_typehints = "description"
 
+# If true, the current module name will be prepended to all description
+# unit titles (such as .. function::).
+add_module_names = False
 
 # -- Options for HTML output -------------------------------------------
 
