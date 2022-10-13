@@ -1,2 +1,0 @@
-# install for documentation
-pip install python-docs-theme
