@@ -1,31 +1,27 @@
-wsipipe.preprocess.patching package
+preprocess.patching package
 ===================================
-
-Module contents
----------------
 
 .. automodule:: wsipipe.preprocess.patching
    :members:
    :undoc-members:
    :show-inheritance:
 
-wsipipe.preprocess.patching.patch\_finder module
+patch\_finder module
 ------------------------------------------------
 
-.. automodule:: wsipipe.preprocess.patching.patch_finder
+.. automodule:: patch_finder
    :members:
    :undoc-members:
    :show-inheritance:
 
-wsipipe.preprocess.patching.patchset module
+patchset module
 -------------------------------------------
 
 .. automodule:: wsipipe.preprocess.patching.patchset
    :members:
    :undoc-members:
-   :show-inheritance:
 
-wsipipe.preprocess.patching.patchset\_utils module
+patchset\_utils module
 --------------------------------------------------
 
 .. automodule:: wsipipe.preprocess.patching.patchset_utils

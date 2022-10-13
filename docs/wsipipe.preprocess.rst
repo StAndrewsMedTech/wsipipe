@@ -1,9 +1,6 @@
 wsipipe.preprocess package
 ==========================
 
-Module contents
----------------
-
 .. automodule:: wsipipe.preprocess
    :members:
    :undoc-members:
@@ -19,10 +16,3 @@ Subpackages
    wsipipe.preprocess.sample
    wsipipe.preprocess.tissue_detection
 
-Module contents
----------------
-
-.. automodule:: wsipipe.preprocess
-   :members:
-   :undoc-members:
-   :show-inheritance:
