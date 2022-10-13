@@ -1,6 +1,14 @@
 wsipipe.preprocess.patching package
 ===================================
 
+Module contents
+---------------
+
+.. automodule:: wsipipe.preprocess.patching
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 wsipipe.preprocess.patching.patch\_finder module
 ------------------------------------------------
 
@@ -25,10 +33,3 @@ wsipipe.preprocess.patching.patchset\_utils module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
-
-.. automodule:: wsipipe.preprocess.patching
-   :members:
-   :undoc-members:
-   :show-inheritance:

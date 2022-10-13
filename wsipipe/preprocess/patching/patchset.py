@@ -3,14 +3,14 @@ PatchSets are sets of patches and all the information
 required to create them from the slides.
 
 Many patches in the set may use the same details, (which we call PatchSettings):
-* the path of the slide to read from
-* the level of the slide at which to create the patch
-* the size of the patch to be created
-* how to load the slide
+    - the path of the slide to read from
+    - the level of the slide at which to create the patch
+    - the size of the patch to be created
+    - how to load the slide
 
 To create an individual patch, you need to know:
-* the top left position of the patch
-* the label to be applied to the patch
+    - the top left position of the patch
+    - the label to be applied to the patch
 
 Therefore the PatchSets are a dataframe and a settings list.
 

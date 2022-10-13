@@ -10,6 +10,10 @@ from wsipipe.utils import Size, Point
 
 
 class OSSlide(SlideBase):
+    """
+    Read slides to generic format using the openslide package.
+    For example, to open OMETiff WSIs.
+    """
     
     def __init__(self, path: Path) -> None:
         self._path = path

@@ -1,11 +1,11 @@
 """
-Patch Finders describe how patches are created for a slide
+Patch Finders describe how patches are created for a slide.
 
 They work on a labelled image, that is a numpy array with
 integers giving the annotation category for each pixel.
 
 The input labelled image can be at any level of the pyramid 
-for which a numpy array for that size can fit into memory
+for which a numpy array for that size can fit into memory.
 
 A patch finder will create a dataframe with columns x, y, label
 where x and y represents the top left corner of the patch and

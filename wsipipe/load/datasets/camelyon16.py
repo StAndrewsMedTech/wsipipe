@@ -1,11 +1,8 @@
 """
-Loader for the Camelyon 16 dataset
-
-Slides are tiffs read using openslide
-
-Annotations are asapxml
-
-Output labels for slides are background, normal and tumor
+Loader for the Camelyon 16 dataset.
+    - Slides are tiffs read using openslide
+    - Annotations are asapxml
+    - Output labels for slides are background, normal and tumor
 
 """
 

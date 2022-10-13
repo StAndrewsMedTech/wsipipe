@@ -1,11 +1,8 @@
 """
-Loader for the STRIP AI dataset
-
-Slides are tiffs read using openslide
-
-A single annotation is applied to whole slide
-
-Output labels for slides are background, CE and LAA
+Loader for the STRIP AI dataset.
+    - Slides are tiffs read using openslide
+    - A single annotation is applied to whole slide
+    - Output labels for slides are background, CE and LAA
 
 """
 

@@ -1,3 +1,6 @@
+"""
+Functionality for converting between formats.
+"""
 from typing import Dict
 
 import numpy as np

@@ -1,10 +1,10 @@
 wsipipe.load.datasets package
 =============================
 
-wsipipe.load.datasets.camelyon16 module
----------------------------------------
+Module contents
+---------------
 
-.. automodule:: wsipipe.load.datasets.camelyon16
+.. automodule:: wsipipe.load.datasets
    :members:
    :undoc-members:
    :show-inheritance:
@@ -17,10 +17,10 @@ wsipipe.load.datasets.loader module
    :undoc-members:
    :show-inheritance:
 
-wsipipe.load.datasets.registry module
--------------------------------------
+wsipipe.load.datasets.camelyon16 module
+---------------------------------------
 
-.. automodule:: wsipipe.load.datasets.registry
+.. automodule:: wsipipe.load.datasets.camelyon16
    :members:
    :undoc-members:
    :show-inheritance:
@@ -33,10 +33,11 @@ wsipipe.load.datasets.stripai module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
+wsipipe.load.datasets.registry module
+-------------------------------------
 
-.. automodule:: wsipipe.load.datasets
+.. automodule:: wsipipe.load.datasets.registry
    :members:
    :undoc-members:
    :show-inheritance:
+

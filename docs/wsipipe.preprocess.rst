@@ -1,6 +1,14 @@
 wsipipe.preprocess package
 ==========================
 
+Module contents
+---------------
+
+.. automodule:: wsipipe.preprocess
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 

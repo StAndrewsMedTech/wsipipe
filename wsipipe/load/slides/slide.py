@@ -1,7 +1,6 @@
 """
-Parent class that contains functionality for reading slides
-
-These are used to render different types of slides into a common format
+SlideBase is a parent class that contains functionality for reading slides.
+This is used to render different types of slides into a common format
 
 """
 
@@ -18,6 +17,20 @@ from wsipipe.utils import Size, Point
 
 
 class SlideBase(metaclass=ABCMeta):
+    """Generic base class for slide loaders.
+
+    Methods:
+        open: opens a slide
+        close: closes a slide
+        path: returns the filepath to the slide
+        dimensions: returns a list of the slide dimensions in pixels
+        for each level present in the WSI pyramid
+        read_region: returns a specified region of the slide as a PIL image
+        read_regions: returns multiple regions as a list of PIL images
+        get_thumbnail: returns the whole of the slide at a given level
+        in the WSI pyramid as numpy array. This can run out of memory if 
+        too low a level in the pyramid is selected
+    """
     @abstractmethod
     def open(self) -> None:
         raise NotImplementedError

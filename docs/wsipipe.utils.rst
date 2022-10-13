@@ -1,6 +1,14 @@
 wsipipe.utils package
 =====================
 
+Module contents
+---------------
+
+.. automodule:: wsipipe.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 wsipipe.utils.convert module
 ----------------------------
 
@@ -25,10 +33,3 @@ wsipipe.utils.geometry module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
-
-.. automodule:: wsipipe.utils
-   :members:
-   :undoc-members:
-   :show-inheritance:

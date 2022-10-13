@@ -1,6 +1,5 @@
 """
-Samplers apply different sampling policies to patchsets
-
+Samplers apply different sampling policies to patchsets.
 """
 
 from typing import Callable

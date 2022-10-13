@@ -9,10 +9,3 @@ wsipipe.preprocess.sample.sampler module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
-
-.. automodule:: wsipipe.preprocess.sample
-   :members:
-   :undoc-members:
-   :show-inheritance:
