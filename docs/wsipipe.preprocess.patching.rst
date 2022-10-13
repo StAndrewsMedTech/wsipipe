@@ -1,4 +1,4 @@
-preprocess.patching package
+wsipipe.preprocess.patching package
 ===================================
 
 .. automodule:: wsipipe.preprocess.patching

@@ -5,8 +5,8 @@ from PIL import Image
 
 from wsipipe.preprocess.patching import make_patchset_for_slide
 from wsipipe.utils import pool2d
-from wsipipe_eval.whole_slide_dataloader import get_pytorch_slide_data_loader
-from wsipipe_eval.eval_model_on_slide import eval_model_on_slide
+from wsipipe_torch.dataloaders.whole_slide_dataloader import get_pytorch_slide_data_loader
+from wsipipe_torch.evaluation.eval_model_on_slide import eval_model_on_slide
 
 
 def to_heatmap(patches_df, class_name: str, border, jitter, patch_size, stride) -> np.array:
@@ -45,13 +45,23 @@ def to_heatmap(patches_df, class_name: str, border, jitter, patch_size, stride) 
     thumbnail_out = Image.fromarray(np.array(thumbnail_out * 255, dtype=np.uint8))
 
     return thumbnail_out
+
+
+def to_heatmaps(patches_df: pd.DataFrame, patch_finder, labels, saveloc: Path = None):
+
+    heatmaps = []
+
+    # - output heatmap
+    for lab in labels:
+        heatmap = to_heatmap(patches_df, class_name = lab, border = patch_finder.border, jitter = patch_finder.jitter, patch_size = patch_finder.patch_size, stride = patch_finder.stride)
+        heatmaps.append(heatmap)
+        if save_loc is not None:
+            heatmap.save(save_loc / ("heatmap_" + lab + ".png"))
+
+    return heatmaps
     
 
-def eval_per_slide(slide_ps, slide_path, batch_size, transform, model, device, output_root):
-
-    # save output
-    slide_dir = output_root / slide_path.stem
-    slide_dir.mkdir(parents=True, exist_ok=True)
+def patch_evaluation_per_slide(slide_ps, slide_path, batch_size, transform, model, device, save_loc: Path = None):
 
     # create dataloader
     slide_dl = get_pytorch_slide_data_loader(slide_ps, batch_size, transform)   
@@ -60,13 +70,9 @@ def eval_per_slide(slide_ps, slide_path, batch_size, transform, model, device, o
 
     # - output probability dataframe
     patches_df = eval_model_on_slide(model, slide_dl, device, labels)
-    patches_df.to_csv(slide_dir / "patch_results.csv", index=False)
+    if save_loc is not None:
+        patches_df.to_csv(save_loc / "patch_results.csv", index=False)
 
     return patches_df
 
 
-def to_heatmaps(patches_df: pd.DataFrame, patch_finder, labels):
-    # - output heatmap
-    for lab in labels:
-        heatmap = to_heatmap(patches_df, class_name = lab, border = patch_finder.border, jitter = patch_finder.jitter, patch_size = patch_finder.patch_size, stride = patch_finder.stride)
-        heatmap.save(slide_dir / ("heatmap_" + lab + ".png"))

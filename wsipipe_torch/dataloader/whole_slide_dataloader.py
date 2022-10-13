@@ -1,7 +1,7 @@
 from torch.utils.data import Dataset, DataLoader
 
 from wsipipe.preprocess.patching import PatchSet
-from wsipipe_eval.dataloader_utils import on_init, get_single_patch
+from wsipipe_torch.dataloaders.dataloader_utils import on_init, get_single_patch
 
 
 class SlideDatasetPytorch(Dataset):

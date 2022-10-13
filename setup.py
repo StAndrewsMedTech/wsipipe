@@ -20,8 +20,8 @@ test_requirements = [ ]
 project = "wsipipe"
 
 setup(
-    author="David Morrison",
-    author_email='dm236@st-andrews.ac.uk',
+    author="David Morrison, Christina Fell",
+    author_email='dm236@st-andrews.ac.uk, cmf21@st-andrews.ac.uk',
     python_requires='>=3.5',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',

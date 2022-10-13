@@ -32,13 +32,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/davemor/wsipipe
+    $ git clone git://github.com/StAndrewsMedTech/wsipipe
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl -OJL https://github.com/davemor/wsipipe/tarball/master
+    $ curl -OJL https://github.com/StAndrewsMedTech/wsipipe/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -47,5 +47,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/davemor/wsipipe
-.. _tarball: https://github.com/davemor/wsipipe/tarball/master
+.. _Github repo: https://github.com/StAndrewsMedTech/wsipipe
+.. _tarball: https://github.com/StAndrewsMedTech/wsipipe/tarball/master
