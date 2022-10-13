@@ -9,7 +9,7 @@ from PIL import Image
 import pandas as pd
 
 
-def pil_to_np(image: Image) -> np.ndarray:
+def pil_to_np(image: Image.Image) -> np.ndarray:
     """ Convert a PIL image into a Numpy array
 
     Args:
@@ -23,7 +23,7 @@ def pil_to_np(image: Image) -> np.ndarray:
     return arr
 
 
-def np_to_pil(arr: np.ndarray) -> Image:
+def np_to_pil(arr: np.ndarray) -> Image.Image:
     """ Convert a Numpy array into a PIL image
 
     Args:
