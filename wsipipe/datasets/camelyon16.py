@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pandas as pd
 
-def training(cam16_path: Path = Path("data", "camelyon16"), project_root: Path = Path()) -> pd.DataFrame:
+def training(cam16_path: Path = Path("data", "camelyon16"), project_root: Path = None) -> pd.DataFrame:
     """ Create Camleyon 16 training dataset
 
     This function goes through the input directories for the training slides, 
@@ -30,21 +30,36 @@ def training(cam16_path: Path = Path("data", "camelyon16"), project_root: Path =
         df (pd.DataFrame): A dataframe with columns slide, annotation, label and tags
     """
     # set up the paths to the slides and annotations
-    dataset_root = project_root / cam16_path / "training"
+    if project_root is None:
+        dataset_root = cam16_path / "training"
+    else:
+        dataset_root = project_root / cam16_path / "training"
     annotations_dir = dataset_root / "lesion_annotations"
     tumor_slide_dir = dataset_root / "tumor"
     normal_slide_dir = dataset_root / "normal"
 
-    # all paths are relative to the project root
-    annotation_paths = sorted(
-        [p.relative_to(project_root) for p in annotations_dir.glob("*.xml")]
-    )
-    tumor_slide_paths = sorted(
-        [p.relative_to(project_root) for p in tumor_slide_dir.glob("*.tif")]
-    )
-    normal_slide_paths = sorted(
-        [p.relative_to(project_root) for p in normal_slide_dir.glob("*.tif")]
-    )
+    # all paths are relative to the project root if defined
+    if project_root is None:
+        annotation_paths = sorted(
+            [p for p in annotations_dir.glob("*.xml")]
+        )
+        tumor_slide_paths = sorted(
+            [p for p in tumor_slide_dir.glob("*.tif")]
+        )
+        normal_slide_paths = sorted(
+            [p for p in normal_slide_dir.glob("*.tif")]
+        )
+
+    else:
+        annotation_paths = sorted(
+            [p.relative_to(project_root) for p in annotations_dir.glob("*.xml")]
+        )
+        tumor_slide_paths = sorted(
+            [p.relative_to(project_root) for p in tumor_slide_dir.glob("*.tif")]
+        )
+        normal_slide_paths = sorted(
+            [p.relative_to(project_root) for p in normal_slide_dir.glob("*.tif")]
+        )
 
     # turn them into a data frame and pad with empty annotation paths
     df = pd.DataFrame()
@@ -58,7 +73,7 @@ def training(cam16_path: Path = Path("data", "camelyon16"), project_root: Path =
     return df
 
 
-def testing(cam16_path: Path = Path("data", "camelyon16"), project_root: Path = Path()) -> pd.DataFrame:
+def testing(cam16_path: Path = Path("data", "camelyon16"), project_root: Path = None) -> pd.DataFrame:
     """ Create Camleyon 16 testing dataset
     
     This function goes through the input directories for the testing slides, 
@@ -73,15 +88,25 @@ def testing(cam16_path: Path = Path("data", "camelyon16"), project_root: Path = 
         df (pd.DataFrame): A dataframe with columns slide, annotation, label and tags
     """
     # set up the paths to the slides and annotations
-    dataset_root = project_root / cam16_path / "testing"
+    if project_root is None:
+        dataset_root = cam16_path / "testing"
+    else:
+        dataset_root = project_root / cam16_path / "testing"
+
     annotations_dir = dataset_root / "lesion_annotations"
     slide_dir = dataset_root / "images"
 
-    # all paths are relative to the dataset 'root'
-    slide_paths = sorted([p.relative_to(project_root) for p in slide_dir.glob("*.tif")])
-    annotation_paths = sorted(
-        [p.relative_to(project_root) for p in annotations_dir.glob("*.xml")]
-    )
+    # all paths are relative to the dataset 'root' if defined
+    if project_root is None:
+        slide_paths = sorted([p for p in slide_dir.glob("*.tif")])
+        annotation_paths = sorted(
+            [p for p in annotations_dir.glob("*.xml")]
+        )
+    else:
+        slide_paths = sorted([p.relative_to(project_root) for p in slide_dir.glob("*.tif")])
+        annotation_paths = sorted(
+            [p.relative_to(project_root) for p in annotations_dir.glob("*.xml")]
+        )
 
     # get the slide name
     slide_names = [p.stem for p in slide_paths]
