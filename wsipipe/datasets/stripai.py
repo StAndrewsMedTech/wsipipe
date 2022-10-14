@@ -15,7 +15,7 @@ import os
 from pathlib import Path
 import pandas as pd
 
-def convert_to_pyramids(mayo_path: Path = Path("data", "mayo-clinic-strip-ai"), project_root: Path = Path('/')):
+def convert_to_pyramids(mayo_path: Path = Path("data", "mayo-clinic-strip-ai"), project_root: Path = Path()):
     """ Create pyramids for whole slide images
 
     The whole slide images as downloaded only contain data at level 0, 
@@ -49,7 +49,7 @@ def convert_to_pyramids(mayo_path: Path = Path("data", "mayo-clinic-strip-ai"), 
             convert(img_path, output_path)
 
 
-def training(mayo_path: Path = Path("data", "mayo-clinic-strip-ai"), project_root: Path = Path('/')) -> pd.DataFrame:
+def training(mayo_path: Path = Path("data", "mayo-clinic-strip-ai"), project_root: Path = Path()) -> pd.DataFrame:
     """ Create Strip AI training dataset
     
     This function goes through the input directories for the training slides, 

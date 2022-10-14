@@ -113,7 +113,7 @@ def visualise_annotations(annot_path: Path, slide_path: Path, loader, level: int
         with the annotation labels plotted in it.
     """
 
-    with loader.slide_loader(slide_path) as slide:
+    with loader.load_slide(slide_path) as slide:
         # read in annotations as list of x, y points at level zero
         annotations = loader.load_annotations(annot_path)
         # get shape of slide at level - size to plot the annotations

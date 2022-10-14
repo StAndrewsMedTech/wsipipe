@@ -2,4 +2,4 @@
 
 __author__ = """Christina Fell"""
 __email__ = 'cmf21@st-andrews.ac.uk'
-__version__ = '0.1.1'
+__version__ = '0.1.3a'

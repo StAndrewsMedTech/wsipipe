@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pandas as pd
 
-def training(cam16_path: Path = Path("data", "camelyon16"), project_root: Path = Path('/')) -> pd.DataFrame:
+def training(cam16_path: Path = Path("data", "camelyon16"), project_root: Path = Path()) -> pd.DataFrame:
     """ Create Camleyon 16 training dataset
 
     This function goes through the input directories for the training slides, 
@@ -58,7 +58,7 @@ def training(cam16_path: Path = Path("data", "camelyon16"), project_root: Path =
     return df
 
 
-def testing(cam16_path: Path = Path("data", "camelyon16"), project_root: Path = Path('/')) -> pd.DataFrame:
+def testing(cam16_path: Path = Path("data", "camelyon16"), project_root: Path = Path()) -> pd.DataFrame:
     """ Create Camleyon 16 testing dataset
     
     This function goes through the input directories for the testing slides, 

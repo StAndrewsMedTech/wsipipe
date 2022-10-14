@@ -64,7 +64,7 @@ the WSI it may not be possible to do this at the lowest levels (highest magnific
 of the image pyramid due to lack of memory. In the example we are extracting the thumbnail at 
 level 5.::
 
-    with dset_loader.slide_loader(row.slide) as slide:
+    with dset_loader.load_slide(row.slide) as slide:
         thumb = slide.get_thumbnail(5)
 
 This code returns a numpy array, if you want to for example display it as a PIL image in a jupyter notebook.::
