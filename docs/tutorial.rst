@@ -2,9 +2,7 @@
 Tutorial
 =====
 
-Some basics to get you started using wsipipe. 
-
-Wsipipe is structured around
+Some basics to get you started using wsipipe. Wsipipe is structured around:
     - datasets, which contain the details of where files are stored.
     - patchsets, which contain details of where patches are within an WSI.
 
@@ -33,6 +31,8 @@ The code to create the wsipipe dataset dataframe is::
 
 We only want to use a few slides for the examples in this tutorial so we can cut down the size using sample_dataset.
 For example if we want to randomly select 2 slides of each label category from the dataset::
+
+    from wsipipe.datasets.dataset_utils import sample_dataset
 
     small_train_dset = sample_dataset(train_dset, 2)
 
@@ -111,7 +111,11 @@ We can also apply filters or morphological operations as part of the tissue dete
 
     prefilt = GaussianBlur(sigma=1)
     morph = SimpleClosingTransform()
-    tisdet = TissueDetectorGreyScale(grey_level=0.85, morph_transform = morph, pre_filter = prefilt)
+    tisdet = TissueDetectorGreyScale(
+        grey_level=0.85, 
+        morph_transform = morph, 
+        pre_filter = prefilt
+    )
     tissmask = tisdet(thumb)
     np_to_pil(tissmask)
 
@@ -154,7 +158,12 @@ We can also create patchsets for the whole dataset. This simply returns a list o
 
     from wsipipe.preprocess.patching import make_patchsets_for_dataset
 
-    psets_for_dset = make_patchsets_for_dataset(small_train_dset, dset_loader, tisdet, patchfinder)
+    psets_for_dset = make_patchsets_for_dataset(
+        dataset = small_train_dset, 
+        loader = dset_loader, 
+        tissue_detector = tisdet, 
+        patch_finder = patchfinder
+    )
 
 Saving and loading patchsets
 ============================
@@ -166,7 +175,13 @@ This function saves each patchset in a separate subdirectory of the output direc
 
     from wsipipe.preprocess.patching import make_and_save_patchsets_for_dataset
 
-    psets_for_dset = make_and_save_patchsets_for_dataset(small_train_dset, dset_loader, tisdet, patchfinder, output_dir = path_to_pset_folder)
+    psets_for_dset = make_and_save_patchsets_for_dataset(
+        dataset = small_train_dset, 
+        loader = dset_loader, 
+        tissue_detector = tisdet, 
+        patch_finder = patchfinder, 
+        output_dir = path_to_pset_folder
+    )
 
 You can also load datasets created with the same folder structure.::
 
@@ -194,7 +209,11 @@ from the other categories and all the samples from the smallest category. The sa
 
     from wsipipe.preprocess.sample import balanced_sample
 
-    sampled_patches = balanced_sample(patches = all_patches_in_dset, num_samples = 1000, floor_samples = 500)
+    sampled_patches = balanced_sample(
+        patches = all_patches_in_dset, 
+        num_samples = 1000, 
+        floor_samples = 500
+    )
 
 Creating patches
 ================

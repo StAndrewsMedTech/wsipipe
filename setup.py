@@ -51,6 +51,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/davemor/wsipipe',
-    version=___version__,
+    version=__version__,
     zip_safe=False,
 )
