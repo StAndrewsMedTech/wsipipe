@@ -37,6 +37,8 @@ def np_to_pil(arr: np.ndarray) -> Image.Image:
         arr = arr.astype("uint8") * 255
     elif arr.dtype == "float64" or arr.dtype == "float32":
         arr = (arr * 255).astype("uint8")
+    elif arr.dtype == "int64":
+        arr = arr.astype("uint8")
     return Image.fromarray(arr)
 
 

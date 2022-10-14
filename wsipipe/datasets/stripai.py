@@ -33,8 +33,11 @@ def convert_to_pyramids(data_root: Path = Path("data", "mayo-clinic-strip-ai"), 
         print(f"Converting {in_path}")
         os.system(f"vips tiffsave {in_path} {out_path} --compression=lzw --tile --tile-width=256 --tile-height=256 --pyramid")
 
+    data_root = Path(data_root)
+    out_root = Path(out_root)
+
     if project_root is not None:
-        data_root = project_root / data_root 
+        data_root = project_root / data_root
         out_root = project_root / out_root
 
     # train images

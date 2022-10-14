@@ -26,9 +26,11 @@ def visualise_tissue_detection_for_slide(
         thumb = slide.get_thumbnail(vis_level)
     tissue_mask = tissue_detector(thumb)
     tissue_mask = np.array(tissue_mask*255, dtype=np.uint8)
-    _, contours, _ = cv2.findContours(
+    findcntrs = cv2.findContours(
         image=tissue_mask, mode=cv2.RETR_TREE, method=cv2.CHAIN_APPROX_NONE
     )
+    # depending on version of cv2, find contours either returns 2 or 3 objects, with contours always the 2nd
+    contours = findcntrs[1]
     # draw contours on the original image
     outline_img = cv2.drawContours(
         image=thumb, contours=contours, contourIdx=-1, 

@@ -31,9 +31,9 @@ def training(cam16_path: Path = Path("data", "camelyon16"), project_root: Path =
     """
     # set up the paths to the slides and annotations
     if project_root is None:
-        dataset_root = cam16_path / "training"
+        dataset_root = Path(cam16_path) / "training"
     else:
-        dataset_root = project_root / cam16_path / "training"
+        dataset_root = project_root / Path(cam16_path) / "training"
     annotations_dir = dataset_root / "lesion_annotations"
     tumor_slide_dir = dataset_root / "tumor"
     normal_slide_dir = dataset_root / "normal"
@@ -89,9 +89,9 @@ def testing(cam16_path: Path = Path("data", "camelyon16"), project_root: Path = 
     """
     # set up the paths to the slides and annotations
     if project_root is None:
-        dataset_root = cam16_path / "testing"
+        dataset_root = Path(cam16_path) / "testing"
     else:
-        dataset_root = project_root / cam16_path / "testing"
+        dataset_root = project_root / Path(cam16_path) / "testing"
 
     annotations_dir = dataset_root / "lesion_annotations"
     slide_dir = dataset_root / "images"
