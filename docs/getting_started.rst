@@ -8,4 +8,5 @@ Getting started
    readme
    installation
    usage
+   tutorial
 

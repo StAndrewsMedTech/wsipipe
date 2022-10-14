@@ -94,3 +94,33 @@ class AnnotationSet:
         for a in annotations:
             a.draw(image, self.labels, factor)
         return image.astype("int")
+
+
+def visualise_annotations(annot_path: Path, slide_path: Path, loader, level: int) -> np.array:
+    """ Creates a image render of the annotations of a slide 
+    
+    Converts annotations from level zero to the specified level.
+    Requires slide path to find the correct dimensions of the output image.
+    Returns a numpy array
+
+    Args:
+        annot_path (Path): A path to the annotation file
+        slide_path (Path): A path to the WSI file
+        loader: The loader to use for slides and annots
+        level (int): the level to create the numpy array
+    Returns:
+        labels_image (np.array): An array the same size as the WSI at level
+        with the annotation labels plotted in it.
+    """
+
+    with loader.slide_loader(slide_path) as slide:
+        # read in annotations as list of x, y points at level zero
+        annotations = loader.load_annotations(annot_path)
+        # get shape of slide at level - size to plot the annotations
+        labels_shape = slide.dimensions[level].as_shape()
+        # get scale factor to convert annotations from level zero to level
+        scale_factor = 2 ** level
+        # render annotations into numpy array 
+        labels_image = annotations.render(labels_shape, scale_factor)
+
+    return labels_image

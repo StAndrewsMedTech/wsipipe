@@ -95,6 +95,38 @@ def make_and_save_patchsets_for_dataset(
     return patchsets
 
 
+def make_patchsets_for_dataset(
+    dataset: pd.DataFrame,
+    loader: Loader,
+    tissue_detector: TissueDetector,
+    patch_finder: PatchFinder,
+    project_root: Path = Path('/')    
+) -> List[PatchSet]:
+    """Creates PatchSets for all slides in a dataset
+
+    For each slide in the dataset this creates the PatchSet
+
+    Args:
+        dataset (pd.DataFrame): a dataframe containing columns slide and annotation
+        loader (Loader): loader to use to load slide and annotations
+        tissue_detector (TissueDetector): tissue detector to use to remove background
+        patch_finder (PatchFinder): patch finder to use to create patches
+        project_root (Path, optional): paths will be stored relative to the project root.
+            Defaults to root (absolute paths)
+    Returns:
+        patchset (List[PatchSet]): A list of PatchSets one for each slide
+    """
+
+    patchsets = []
+    for row in dataset.itertuples():
+        patchset = make_patchset_for_slide(
+            row.slide, row.annotation, loader, tissue_detector, patch_finder, project_root
+        )
+        patchsets.append(patchset)
+
+    return patchsets
+
+
 def load_patchsets_from_directory(patchsets_dir: Path):
     """Loads PatchSets from a directory
 
@@ -183,3 +215,4 @@ def visualise_patches_on_slide(ps: PatchSet, vis_level: (int), project_root: Pat
         thumbdraw.rectangle([row.x, row.y, row.x2, row.y2], fill=None, outline='black', width=1)
         
     return thumb
+

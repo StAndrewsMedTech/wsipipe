@@ -1,0 +1,63 @@
+from collections import namedtuple
+from pathlib import Path
+from typing import List
+
+import cv2
+import numpy as np
+import pandas as pd
+from skimage.measure import label, regionprops
+
+
+def per_heatmap(img_grey: np.array, global_thresh: List[float], global_feats: List[str], region_thresh: List[float], nregs: int, region_feats: List[str], labelname: str):
+
+    allfeats = []
+    for gth in global_thresh:
+        globfeats = get_global_features(img_grey, gth, global_feats)
+        allfeats.append(globfeats)
+
+    for rth in region_thresh:
+        regfeats = get_region_features(img_grey, rth, nregs, region_feats)
+        allfeats.append(regfeats)
+
+    features_df = pd.concat(allfeats, axis=1)
+    features_df.columns = [cl + labelname for cl in features_df.columns]
+
+    return features_df
+
+
+def per_slide(slide_result_dir: Path, labelnames: List[str], global_thresh: List[List[float]], global_feats: List[List[str]], region_thresh: List[List[float]], nregs: List[int], region_feats: List[List[str]]):
+
+    heatmaps = [cv2.imread(str(slide_result_dir / ("heatmap_" + lb +".png")), 0) for lb in labelnames]
+    all_features = []
+    for hm, lb, gt, gf, rt, nr, rf in zip(heatmaps, labelnames, global_thresh, global_feats, region_thresh, nregs, region_feats):
+        feats = per_heatmap(hm, gt, gf, rt, nr, rf, lb)
+        all_features.append(feats)
+
+    slide_features = pd.concat(all_features, axis=1, ignore_index=True)
+
+    return slide_features
+
+
+def per_dataset(ds_info: pd.DataFrame, dataset_result_dir: Path, labelnames: List[str], global_thresh: List[float], global_feats: List[str], region_thresh: List[float], nregs: int, region_feats: List[str]):
+
+    # get list of slide directories
+    slide_result_dirs = [x for x in dataset_result_dir.iterdir() if x.is_dir()]
+    all_slide_features = []
+    ds_info['image_id'] = ds_info['slide'].map(lambda a: Path(a).stem)
+    for sr in slide_result_dirs:
+        slide_features = per_slide(sr, labelnames, global_thresh, global_feats, region_thresh, nregs, region_feats)
+        slide_features["slide_name"] = sr.stem
+        slide_info = ds_info[ds_info.image_id == sr.stem]
+        slide_features["slide_label"] = slide_info.label.iloc[0]
+        slide_features["tags"] = slide_info.tags.iloc[0]
+        all_slide_features.append(slide_features)
+
+    dataset_features = pd.concat(all_slide_features, axis=0, ignore_index=True)
+    dataset_features = dataset_features.reset_index()
+
+    return dataset_features
+
+
+
+    
+
