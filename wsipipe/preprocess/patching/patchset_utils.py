@@ -81,6 +81,7 @@ def make_and_save_patchsets_for_dataset(
     """
 
     patchsets = []
+    output_dir = Path(output_dir)
     for row in dataset.itertuples():
         patchset_path = output_dir / Path(row.slide).stem
         if patchset_path.is_dir():

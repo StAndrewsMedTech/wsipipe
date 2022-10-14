@@ -7,7 +7,7 @@ import math
 
 import numpy as np
 from skimage.measure import label, regionprops, block_reduce
-from skimage.morphology import binary_closing
+from skimage.morphology import binary_closing, binary_opening
 
 
 class MorphologyTransform(metaclass=ABCMeta):
@@ -24,6 +24,12 @@ class SimpleClosingTransform(MorphologyTransform):
     def __call__(self, image: np.ndarray) -> np.ndarray:
         """ Applies binary closing transform (fills small holes in a binary image)"""
         mask_out = binary_closing(image)
+        return mask_out
+
+class SimpleOpeningTransform(MorphologyTransform):
+    def __call__(self, image: np.ndarray) -> np.ndarray:
+        """ Applies binary opening transform (removes small bright dots in a binary image)"""
+        mask_out = binary_opening(image)
         return mask_out
 
 class SizedClosingTransform(MorphologyTransform):

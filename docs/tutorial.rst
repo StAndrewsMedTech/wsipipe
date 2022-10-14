@@ -90,8 +90,8 @@ in the code below they are mulitplied by 100 to make them visible when displayed
     )
     np_to_pil(labelled_image*100)
 
-Applying background subtration
-==============================
+Applying background subtraction
+===============================
 
 Often large parts of WSI are background that contain nothing of interest, 
 therefore we want to split the background from the tissue so we know which are the areas of interest on the slide.
@@ -109,10 +109,10 @@ We can also apply filters or morphological operations as part of the tissue dete
 
     from wsipipe.preprocess.tissue_detection import SimpleClosingTransform, GaussianBlur
 
-    prefilt = GaussianBlur(sigma=1)
-    morph = SimpleClosingTransform()
+    prefilt = GaussianBlur(sigma=2)
+    morph = [SimpleOpeningTransform(), SimpleClosingTransform()]
     tisdet = TissueDetectorGreyScale(
-        grey_level=0.85, 
+        grey_level=0.75, 
         morph_transform = morph, 
         pre_filter = prefilt
     )
@@ -136,8 +136,8 @@ rendered at level 5.::
 
     from wsipipe.preprocess.patching import GridPatchFinder, make_patchset_for_slide
 
-    patchfinder = GridPatchFinder(patch_level=0, patch_size=256, stride=256, labels_level=5)
-    pset = make_patchset_for_slide(row.slide, row.annot, dset_loader, tisdet, patchfinder)
+    patchfinder = GridPatchFinder(patch_level=1, patch_size=512, stride=512, labels_level=5)
+    pset = make_patchset_for_slide(row.slide, row.annotation, dset_loader, tisdet, patchfinder)
 
 The patchset is datafrom with the top left position and label for each patch, plus a settings object 
 which stores information which is used for multiple patches such as the patch size and slide path. 
@@ -211,8 +211,8 @@ from the other categories and all the samples from the smallest category. The sa
 
     sampled_patches = balanced_sample(
         patches = all_patches_in_dset, 
-        num_samples = 1000, 
-        floor_samples = 500
+        num_samples = 500, 
+        floor_samples = 100
     )
 
 Creating patches
