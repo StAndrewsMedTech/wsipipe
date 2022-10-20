@@ -20,14 +20,17 @@ The dataframe should have four columns, slide, annotation, label, and tags.
 You can create these dataframes or read from disk. 
 WSIpipe also has some datasets predefined, for example camelyon16.
 
-If you have downloaded the camelyon16 data as structured on the  Camelyon 16 google drive:
-https://camelyon17.grand-challenge.org/Data/ and stored it in a local folder.
+If you have downloaded the camelyon16 data from and stored it in a local folder:
+https://camelyon17.grand-challenge.org/Data/ .
+It is assumed the local folder (path_to_local_folder) is structured in the dame way as the Camleyon16 google drive, 
+that is it should contain two folders named training and testing.
 
 The code to create the wsipipe dataset dataframe is::
 
     from wsipipe.datasets import camelyon16
 
     train_dset = camelyon16.training(cam16_path = path_to_local_folder)
+
 
 We only want to use a few slides for the examples in this tutorial so we can cut down the size using sample_dataset.
 For example if we want to randomly select 2 slides of each label category from the dataset::
