@@ -5,3 +5,4 @@ Individual modules convert specific annotation types to the generic
 
 from .annotation import *
 from .asapxml import *
+from .geojson import *
