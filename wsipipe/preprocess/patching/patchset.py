@@ -152,7 +152,7 @@ class PatchSet:
         """Creates all the patches for an individual PatchSetting"""
         def get_output_dir_for_label(label: str) -> Path:
             label_str = invert(loader.labels)[label]
-            label_dir = output_dir / label_str
+            label_dir = Path(output_dir) / label_str
             return label_dir
 
         def make_patch_path(x: int, y: int, label: int) -> Path:
