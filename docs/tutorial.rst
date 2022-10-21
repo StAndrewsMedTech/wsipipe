@@ -110,7 +110,7 @@ This returns a binary mask where True/1/white is tissue and False/0/black is bac
 
 We can also apply filters or morphological operations as part of the tissue detection.::
 
-    from wsipipe.preprocess.tissue_detection import SimpleClosingTransform, GaussianBlur
+    from wsipipe.preprocess.tissue_detection import SimpleClosingTransform, SimpleOpeningTransform, GaussianBlur
 
     prefilt = GaussianBlur(sigma=2)
     morph = [SimpleOpeningTransform(), SimpleClosingTransform()]

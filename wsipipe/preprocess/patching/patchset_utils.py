@@ -179,7 +179,7 @@ def visualise_patches_on_slide(ps: PatchSet, vis_level: (int), project_root: Pat
     """ Draws patches on a thumbnail of the slide
 
     Visualise where on the slide the patches occur.
-    Assumes a patch set for one slide with only one set of setting
+    Assumes a patch set for one slide with only one set of settings
 
     Args:
         ps (PatchSet): A PatchSet for one slide
@@ -187,15 +187,16 @@ def visualise_patches_on_slide(ps: PatchSet, vis_level: (int), project_root: Pat
     Returns:
         thumb (Image): A thumbnail of the slide with patch locations drawn on
     """
-    assert len(ps.settings) == 1, "The input patch set contains patches from more than one slide."
-    slide_settings = ps.settings[0]
+    assert len(ps.settings) == 1, "The input patch set contains patches from more than one slide, or more than one patch size / level"
+    slide_settings = ps.settings[0]       
 
     def convert_ps_to_thumb_level(ps, thumb_lev):
         ps_df = ps.df.copy()
-        ps_df.x = ps_df.x.divide(2 ** thumb_lev).astype(int)
-        ps_df.y = ps_df.y.divide(2 ** thumb_lev).astype(int)
-        thumb_patch_size = slide_settings.patch_size // 2 ** thumb_lev
-        return PatchSet(ps_df, [PatchSetting(slide_settings.level, thumb_patch_size,slide_settings.slide_path, slide_settings.loader)])
+        level_diff = thumb_lev - ps.settings[0].level
+        ps_df.x = ps_df.x.divide(2 ** level_diff).astype(int)
+        ps_df.y = ps_df.y.divide(2 ** level_diff).astype(int)
+        thumb_patch_size = slide_settings.patch_size // 2 ** level_diff
+        return PatchSet(ps_df, [PatchSetting(slide_settings.level, thumb_patch_size, slide_settings.slide_path, slide_settings.loader)])
 
     def create_visualisation_frame(ps_in):
         vis_frame = ps_in.df

@@ -40,7 +40,7 @@ setup(
             'wsipipe=wsipipe.cli:main',
         ],
     },
-    install_requires=requirements,
+    install_requires=['scipy', 'scikit-image', 'pandas', 'numpy', 'opencv-python-headless==4.5.5.64', 'Pillow', 'openslide-python'],
     license="MIT license",
     long_description=readme + '\n\n' + history,
     include_package_data=True,
