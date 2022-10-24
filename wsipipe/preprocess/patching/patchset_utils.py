@@ -19,6 +19,7 @@ from wsipipe.preprocess.patching.patchset import PatchSet, PatchSetting
 def make_patchset_for_slide(
     slide_path: Path,
     annot_path: Path,
+    slide_label: str
     loader: Loader,
     tissue_detector: TissueDetector,
     patch_finder: PatchFinder,
@@ -41,7 +42,7 @@ def make_patchset_for_slide(
     """
 
     with loader.load_slide(project_root / slide_path) as slide:
-        annotations = loader.load_annotations(project_root / annot_path)
+        annotations = loader.load_annotations(project_root / annot_path, slide_label)
         labels_shape = slide.dimensions[patch_finder.labels_level].as_shape()
         scale_factor = 2**patch_finder.labels_level
         labels_image = annotations.render(labels_shape, scale_factor)
@@ -88,7 +89,7 @@ def make_and_save_patchsets_for_dataset(
             patchset = PatchSet.load(patchset_path)
         else:
             patchset = make_patchset_for_slide(
-                row.slide, row.annotation, loader, tissue_detector, patch_finder, project_root
+                row.slide, row.annotation, row.label, loader, tissue_detector, patch_finder, project_root
             )
             patchset.save(patchset_path)
         patchsets.append(patchset)
@@ -121,7 +122,7 @@ def make_patchsets_for_dataset(
     patchsets = []
     for row in dataset.itertuples():
         patchset = make_patchset_for_slide(
-            row.slide, row.annotation, loader, tissue_detector, patch_finder, project_root
+            row.slide, row.annotation, row.label, loader, tissue_detector, patch_finder, project_root
         )
         patchsets.append(patchset)
 

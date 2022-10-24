@@ -19,7 +19,9 @@ class Camelyon16Loader(Loader):
     def name(self) -> str:
         return "Camelyon16Loader"
 
-    def load_annotations(self, file: Path, label: str = "normal") -> AnnotationSet:
+    def load_annotations(self, file: Path, label: str) -> AnnotationSet:
+        # default label is always normal for Camelyon16 
+        label = "normal"
         # if there is no annotation file the just pass and empty list
         group_labels = {
             "Tumor": "tumor",
