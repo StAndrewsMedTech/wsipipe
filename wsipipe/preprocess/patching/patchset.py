@@ -22,7 +22,7 @@ In the dataframe each row represents a patch and contains columns:
 """
 
 
-from dataclasses import asdict, dataclass
+#from dataclasses import asdict, dataclass
 import itertools
 import json
 from pathlib import Path
@@ -55,7 +55,7 @@ class PatchSetting:
 
     def to_sdict(self):
         """Writes a PatchSetting to a dictionary so it can be saved to disk"""
-        d = asdict(self)
+        d = self.__dict__
         d["slide_path"] = str(self.slide_path)
         d["loader"] = self.loader.name
         return d
