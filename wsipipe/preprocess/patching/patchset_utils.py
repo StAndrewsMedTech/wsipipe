@@ -19,7 +19,7 @@ from wsipipe.preprocess.patching.patchset import PatchSet, PatchSetting
 def make_patchset_for_slide(
     slide_path: Path,
     annot_path: Path,
-    slide_label: str
+    slide_label: str,
     loader: Loader,
     tissue_detector: TissueDetector,
     patch_finder: PatchFinder,
