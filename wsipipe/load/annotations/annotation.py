@@ -96,7 +96,7 @@ class AnnotationSet:
         return image.astype("int")
 
 
-def visualise_annotations(annot_path: Path, slide_path: Path, loader, level: int) -> np.array:
+def visualise_annotations(annot_path: Path, slide_path: Path, loader, level: int, slide_label: str) -> np.array:
     """ Creates a image render of the annotations of a slide 
     
     Converts annotations from level zero to the specified level.
@@ -115,7 +115,7 @@ def visualise_annotations(annot_path: Path, slide_path: Path, loader, level: int
 
     with loader.load_slide(slide_path) as slide:
         # read in annotations as list of x, y points at level zero
-        annotations = loader.load_annotations(annot_path)
+        annotations = loader.load_annotations(annot_path, label = slide_label)
         # get shape of slide at level - size to plot the annotations
         labels_shape = slide.dimensions[level].as_shape()
         # get scale factor to convert annotations from level zero to level

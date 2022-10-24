@@ -19,7 +19,7 @@ class Camelyon16Loader(Loader):
     def name(self) -> str:
         return "Camelyon16Loader"
 
-    def load_annotations(self, file: Path) -> AnnotationSet:
+    def load_annotations(self, file: Path, label: str = "normal") -> AnnotationSet:
         # if there is no annotation file the just pass and empty list
         group_labels = {
             "Tumor": "tumor",
@@ -31,7 +31,7 @@ class Camelyon16Loader(Loader):
         }
         annotations = load_annotations_asapxml(file, group_labels) if file else []
         labels_order = ["background", "tumor", "normal"]
-        return AnnotationSet(annotations, self.labels, labels_order, "normal")
+        return AnnotationSet(annotations, self.labels, labels_order, label)
 
     def load_slide(self, path: Path) -> SlideBase:
         return OSSlide(path)
