@@ -36,20 +36,22 @@ from wsipipe.load.datasets import Loader, get_loader
 from wsipipe.load.slides import Region, SlideBase
 from wsipipe.utils import invert
 
-@dataclass
-class PatchSetting:
-    """Patch Setting Definition
 
-    Args:
-        level (int): The level at which patches are extracted
-        patch_size (int): The size of patches to be created assumes square
-        slide_path (Path): the path to the whole slide image
-        loader (Loader): A method for loading the slide
-    """
-    level: int
-    patch_size: int
-    slide_path: Path  # not stored in the dataframe
-    loader: Loader  # not stored in the dataframe
+class PatchSetting:
+    def __init__(self, level: int, patch_size: int, slide_path: Path, loader: Loader) -> None:
+        """Patch Setting Definition
+
+        Args:
+            level (int): The level at which patches are extracted
+            patch_size (int): The size of patches to be created assumes square
+            slide_path (Path): the path to the whole slide image
+            loader (Loader): A method for loading the slide
+        """
+
+        self.level = level
+        self.patch_size = patch_size
+        self.slide_path = slide_path  # not stored in the dataframe
+        self.loader = loader  # not stored in the dataframe
 
     def to_sdict(self):
         """Writes a PatchSetting to a dictionary so it can be saved to disk"""

@@ -89,7 +89,8 @@ in the code below they are mulitplied by 100 to make them visible when displayed
         row.annotation, 
         row.slide,
         dset_loader,
-        5
+        5,
+        row.label
     )
     np_to_pil(labelled_image*100)
 
