@@ -3,7 +3,8 @@
 """The setup script."""
 
 from setuptools import setup, find_packages
-from wsipipe import __version__
+#from wsipipe import __version__
+__version__ = '0.1.5a1'
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
