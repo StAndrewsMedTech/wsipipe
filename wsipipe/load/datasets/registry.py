@@ -5,6 +5,15 @@ from wsipipe.load.datasets.stripai import StripaiLoader
 
 loaders = {}
 
+def register_loader(loader_cls) -> None:
+    """  Add loader to loader array for loader extensions
+
+        Args:
+        loader_cls: the loader class to add
+    """
+    loader = loader_cls()
+    loaders[loader.name] = loader
+
 
 def get_loader(name: str) -> Loader:
     """A convenience function to call loader based on its name
