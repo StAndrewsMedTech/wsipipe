@@ -4,7 +4,7 @@
 
 from setuptools import setup, find_packages
 #from wsipipe import __version__
-__version__ = '0.1.5a4'
+__version__ = '0.1.5a5'
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
