@@ -131,7 +131,7 @@ class PatchSet:
             if data_root is not None:
                 s.slide_path = data_root / s.slide_path
             self._export_patches_for_setting(
-                group, output_dir, s.slide_path, s.level, s.patch_size, s.loader, data_root
+                group, output_dir, s.slide_path, s.level, s.patch_size, s.loader
             )
 
     def description(self):
