@@ -116,7 +116,7 @@ class PatchSet:
             settings = [PatchSetting.from_sdict(s) for s in settings]
         return cls(df, settings)
 
-    def export_patches(self, output_dir: Path) -> None:
+    def export_patches(self, output_dir: Path, data_root: Path = None) -> None:
         """Creates all patches in a patch set
         
         Writes patches in subdirectories of their label 
@@ -128,8 +128,10 @@ class PatchSet:
         groups = self.df.groupby("setting")
         for setting_idx, group in groups:
             s = self.settings[setting_idx]
+            if data_root is not None:
+                s.slide_path = data_root / s.slide_path
             self._export_patches_for_setting(
-                group, output_dir, s.slide_path, s.level, s.patch_size, s.loader
+                group, output_dir, s.slide_path, s.level, s.patch_size, s.loader, data_root
             )
 
     def description(self):
@@ -149,7 +151,7 @@ class PatchSet:
         slide_path: Path,
         level: int,
         patch_size: int,
-        loader: Loader,
+        loader: Loader
     ):
         """Creates all the patches for an individual PatchSetting"""
         def get_output_dir_for_label(label: str) -> Path:

@@ -16,8 +16,10 @@ def sample_dataset(df: pd.DataFrame, samples_per_class: str) -> pd.DataFrame:
     """
     g = df.groupby("label")
     assert samples_per_class <= g.size().min(), f"Not enough samples for one of the classes. {samples_per_class} {g.size().min()}"
+
     def sample_group(x):
         return x.sample(samples_per_class).reset_index(drop=True) # todo: make this deterministic
+
     sampled = g.apply(sample_group)
     return sampled
-
+    
