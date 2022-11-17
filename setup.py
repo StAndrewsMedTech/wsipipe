@@ -41,7 +41,7 @@ setup(
             'wsipipe=wsipipe.cli:main',
         ],
     },
-    install_requires=['scipy', 'scikit-image', 'pandas', 'numpy', 'opencv-python-headless==4.5.5.64', 'Pillow', 'openslide-python'],
+    install_requires=['scipy', 'scikit-image', 'pandas', 'numpy', 'opencv-python-headless==4.5.5.64', 'Pillow', 'openslide-python', 'pylibCZIrw'],
     license="MIT license",
     long_description=readme + '\n\n' + history,
     include_package_data=True,
@@ -51,7 +51,7 @@ setup(
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
-    url='https://github.com/davemor/wsipipe',
+    url='https://github.com/StAndrewsMedTech/wsipipe',
     version=__version__,
     zip_safe=False,
 )
