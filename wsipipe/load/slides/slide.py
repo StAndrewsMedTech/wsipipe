@@ -98,6 +98,9 @@ class SlideBase(metaclass=ABCMeta):
         size = self.dimensions[level]
         region = Region(location=Point(0, 0), size=size, level=level)
         im = self.read_region(region)
-        im = im.convert("RGB")
-        im = np.asarray(im)
+        # Convert to rgb numpy array if not already 
+        # (czi provides rgb numpy array by default)
+        if not isinstance(im, np.ndarray):
+            im = im.convert("RGB")
+            im = np.asarray(im)
         return im
